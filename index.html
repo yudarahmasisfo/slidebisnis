@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Model Bisnis Digital – Pertemuan ke-2 (E-Bisnis 3 SKS)</title>
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand-blue:#2563eb; /* blue-600 */
+      --brand-teal:#0ea5a4; /* teal-500-ish */
+      --brand-green:#10b981; /* emerald-500 */
+      --ink:#0b1220;
+    }
+    html, body { height: 100%; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; color: #0f172a; }
+    .heading { font-family: Poppins, Inter, system-ui, -apple-system; letter-spacing: 0.2px; }
+    /* Smooth transitions */
+    .fade-enter { opacity: 0; transform: translateY(10px) scale(0.98); }
+    .fade-enter-active { opacity: 1; transform: translateY(0) scale(1); transition: all 420ms cubic-bezier(.2,.8,.2,1); }
+    .fade-exit { opacity: 1; transform: translateY(0) scale(1); }
+    .fade-exit-active { opacity: 0; transform: translateY(-6px) scale(0.98); transition: all 300ms cubic-bezier(.2,.8,.2,1); }
+    /* Progress bar animation */
+    .progress-smooth { transition: width 360ms cubic-bezier(.2,.8,.2,1); }
+    /* Sticky notes */
+    .sticky-note { box-shadow: 0 8px 24px rgba(2, 44, 74, 0.10); }
+    .draggable { cursor: grab; }
+    .draggable:active { cursor: grabbing; }
+    /* Soft glass card */
+    .glass {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    /* Button depth */
+    .btn {
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.18);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(16, 185, 129, 0.26); }
+    /* Icon bubble */
+    .icon-bubble {
+      background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(16,185,129,.12));
+      border: 1px solid rgba(14,165,164,.2);
+    }
+    /* Slide container sizing */
+    .slide {
+      min-height: 70vh;
+    }
+    /* Link-like tag */
+    .tag {
+      background: linear-gradient(135deg, rgba(14,165,164,.14), rgba(37,99,235,.14));
+      border: 1px solid rgba(14,165,164,.28);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-sky-900 via-cyan-900 to-emerald-900">
+  <!-- Top Bar -->
+  <header class="w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="icon-bubble h-10 w-10 rounded-xl grid place-items-center">
+          <!-- Simple tech logo -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="text-white/90">
+          <div class="heading font-bold text-lg">E-Bisnis (3 SKS)</div>
+          <div class="text-white/70 text-sm">Model Bisnis Digital – Pertemuan ke-2</div>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-2">
+        <span class="tag text-emerald-50 px-3 py-1 rounded-full text-sm">Interaktif</span>
+        <span class="tag text-emerald-50 px-3 py-1 rounded-full text-sm">Modern</span>
+        <span class="tag text-emerald-50 px-3 py-1 rounded-full text-sm">Profesional</span>
+      </div>
+    </div>
+    <!-- Progress -->
+    <div class="w-full bg-white/10 h-1">
+      <div id="progressBar" class="h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-sky-400 progress-smooth" style="width:0%"></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Sidebar / Outline -->
+      <aside class="w-full lg:w-64">
+        <div class="glass rounded-2xl p-4 sticky top-4">
+          <div class="heading text-sky-900 font-semibold mb-3">Daftar Materi</div>
+          <div id="toc" class="space-y-1 text-sky-900/90 text-sm"></div>
+          <button id="toggleTheme" class="mt-4 w-full rounded-xl px-4 py-2 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn">Mode Kontras</button>
+        </div>
+      </aside>
+
+      <!-- Slides -->
+      <section class="flex-1 space-y-6">
+        <!-- Slide Template: each has data-title -->
+        <!-- 1. Cover -->
+        <section class="slide glass rounded-3xl p-6 md:p-10 overflow-hidden" data-title="Cover">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-5">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-50 to-sky-50 text-emerald-700 border border-emerald-200 w-fit">
+                <span>📘</span><span class="text-sm">Pertemuan ke-2 • Mata Kuliah E-Bisnis (3 SKS)</span>
+              </div>
+              <h1 class="heading text-3xl md:text-5xl font-extrabold text-sky-900 leading-tight">
+                Model Bisnis Digital
+              </h1>
+              <p class="text-sky-900/80 text-base md:text-lg">
+                Memahami cara digital menciptakan nilai, menghubungkan pengguna, dan menghasilkan pendapatan.
+              </p>
+              <div class="space-y-2">
+                <label class="text-sky-900/70 text-sm block">Nama Pengajar</label>
+                <input id="lecturerName" class="w-full md:w-3/4 px-4 py-3 rounded-xl border border-emerald-200 focus:outline-none focus:ring-4 focus:ring-emerald-200/70" placeholder="[isi nama Bapak]"/>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button class="rounded-xl px-5 py-3 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" data-nav="next">Mulai ▶</button>
+                <button class="rounded-xl px-5 py-3 bg-white text-sky-800 font-semibold border border-emerald-200 hover:bg-emerald-50" data-jump="Template Kosong BMC">Loncat ke Template</button>
+              </div>
+            </div>
+            <!-- Illustration -->
+            <div class="relative">
+              <div class="absolute -top-6 -right-6 w-40 h-40 rounded-3xl rotate-12 bg-gradient-to-br from-sky-400 to-emerald-400 opacity-20"></div>
+              <div class="rounded-2xl p-6 bg-gradient-to-br from-sky-50 to-emerald-50 border border-emerald-200">
+                <!-- Startup illustration -->
+                <svg viewBox="0 0 600 360" class="w-full h-auto">
+                  <!-- grid background -->
+                  <defs>
+                    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(14,165,164,.2)" stroke-width="1"/>
+                    </pattern>
+                  </defs>
+                  <rect width="600" height="360" fill="url(#grid)"/>
+                  <!-- screens -->
+                  <rect x="70" y="80" rx="14" ry="14" width="200" height="130" fill="#e0f2fe" stroke="#38bdf8"/>
+                  <rect x="330" y="60" rx="14" ry="14" width="200" height="150" fill="#d1fae5" stroke="#34d399"/>
+                  <rect x="210" y="210" rx="12" ry="12" width="180" height="90" fill="#eef2ff" stroke="#60a5fa"/>
+                  <!-- connectors -->
+                  <path d="M170 210 C210 180, 270 160, 380 150" stroke="#0ea5a4" stroke-width="3" fill="none"/>
+                  <circle cx="380" cy="150" r="6" fill="#0ea5a4"/>
+                  <!-- team avatars -->
+                  <g>
+                    <circle cx="120" cy="250" r="22" fill="#bae6fd" stroke="#38bdf8"/>
+                    <circle cx="470" cy="240" r="22" fill="#bbf7d0" stroke="#34d399"/>
+                    <circle cx="300" cy="70" r="16" fill="#e9d5ff" stroke="#a78bfa"/>
+                  </g>
+                  <!-- rocket -->
+                  <g transform="translate(500,300) rotate(-20)">
+                    <path d="M0 0 C20 -10, 40 -10, 60 0 L60 20 C40 30, 20 30, 0 20 Z" fill="#0ea5a4"/>
+                    <circle cx="30" cy="10" r="6" fill="#f0f9ff" stroke="#0369a1"/>
+                    <path d="M0 10 L-18 12 L-26 18" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Pendahuluan -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Pendahuluan">
+          <div class="flex items-start justify-between gap-6">
+            <div class="space-y-4 max-w-3xl">
+              <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900">Apa itu Model Bisnis Digital?</h2>
+              <p class="text-sky-900/85">
+                Cara sebuah bisnis menciptakan, menyampaikan, dan menangkap nilai menggunakan teknologi digital.
+              </p>
+              <!-- Diagram nilai → pengguna → pendapatan -->
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="rounded-xl p-4 bg-sky-50 border border-sky-200">
+                  <div class="flex items-center gap-3">
+                    <div class="icon-bubble h-10 w-10 rounded-lg grid place-items-center">💡</div>
+                    <div class="heading font-semibold text-sky-900">Nilai</div>
+                  </div>
+                  <p class="text-sky-900/70 mt-2 text-sm">Solusi yang memecahkan masalah pengguna.</p>
+                </div>
+                <div class="rounded-xl p-4 bg-emerald-50 border border-emerald-200">
+                  <div class="flex items-center gap-3">
+                    <div class="icon-bubble h-10 w-10 rounded-lg grid place-items-center">👤</div>
+                    <div class="heading font-semibold text-sky-900">Pengguna</div>
+                  </div>
+                  <p class="text-sky-900/70 mt-2 text-sm">Segmentasi jelas dan pengalaman optimal.</p>
+                </div>
+                <div class="rounded-xl p-4 bg-cyan-50 border border-cyan-200">
+                  <div class="flex items-center gap-3">
+                    <div class="icon-bubble h-10 w-10 rounded-lg grid place-items-center">💰</div>
+                    <div class="heading font-semibold text-sky-900">Pendapatan</div>
+                  </div>
+                  <p class="text-sky-900/70 mt-2 text-sm">Sumber monetisasi yang berkelanjutan.</p>
+                </div>
+              </div>
+              <!-- Pertanyaan -->
+              <div class="rounded-2xl p-4 border border-emerald-300 bg-gradient-to-r from-emerald-50 to-sky-50">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl">❓</span>
+                  <span class="font-semibold text-sky-900">Bisnis digital apa yang paling sering kalian gunakan setiap hari?</span>
+                </div>
+                <div class="mt-3 flex gap-2">
+                  <input id="q1" class="flex-1 px-4 py-3 rounded-xl border border-emerald-200" placeholder="Tulis jawaban kalian di sini...">
+                  <button class="rounded-xl px-4 py-3 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" onclick="saveFreeText('q1')">Kirim</button>
+                </div>
+                <p id="q1-status" class="mt-2 text-emerald-700 text-sm hidden">Terkirim! Terima kasih 🙌</p>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="icon-bubble rounded-2xl p-5">
+                <svg width="90" height="90" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 7h18M8 7v10m8-10v10M5 17h14" stroke="#0ea5a4" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Mengapa Penting -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Mengapa Penting">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Mengapa Model Bisnis Digital Penting?</h2>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="rounded-2xl p-5 bg-sky-50 border border-sky-200">
+              <div class="text-2xl">💻</div>
+              <div class="heading font-semibold mt-2 text-sky-900">Transformasi Digital</div>
+              <p class="text-sky-900/70 text-sm mt-1">Mengubah proses dan layanan menjadi lebih cepat dan efisien.</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-emerald-50 border border-emerald-200">
+              <div class="text-2xl">📈</div>
+              <div class="heading font-semibold mt-2 text-sky-900">Skala Operasi</div>
+              <p class="text-sky-900/70 text-sm mt-1">Bertumbuh cepat tanpa biaya fisik yang tinggi.</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-cyan-50 border border-cyan-200">
+              <div class="text-2xl">💡</div>
+              <div class="heading font-semibold mt-2 text-sky-900">Peluang Inovasi</div>
+              <p class="text-sky-900/70 text-sm mt-1">Menciptakan produk dan pengalaman baru.</p>
+            </div>
+          </div>
+          <div class="mt-6 rounded-2xl p-4 bg-gradient-to-r from-emerald-500 to-sky-500 text-white">
+            <span class="font-semibold">Callout:</span> “Bisnis yang tidak go-digital, akan ketinggalan!”
+          </div>
+        </section>
+
+        <!-- 4. Platform Economy – Definisi -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Platform Economy – Definisi">
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-3">Platform Economy</h2>
+              <p class="text-sky-900/80">Model yang menghubungkan dua atau lebih pihak (produsen–konsumen) melalui platform, memfasilitasi interaksi dan transaksi.</p>
+              <div class="mt-4 rounded-xl p-4 bg-cyan-50 border border-cyan-200">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">🔗</span><span class="font-semibold text-sky-900">Menghubungkan dua pihak</span>
+                </div>
+                <p class="text-sky-900/70 text-sm mt-1">Contoh: driver–penumpang, seller–buyer, creator–viewer</p>
+              </div>
+            </div>
+            <div class="rounded-2xl p-6 bg-gradient-to-br from-emerald-50 to-sky-50 border border-emerald-200">
+              <!-- Simple two-sided illustration -->
+              <svg viewBox="0 0 560 260" class="w-full h-auto">
+                <rect x="50" y="60" width="160" height="140" rx="16" fill="#e0f2fe" stroke="#38bdf8"/>
+                <rect x="350" y="60" width="160" height="140" rx="16" fill="#d1fae5" stroke="#34d399"/>
+                <circle cx="140" cy="130" r="18" fill="#60a5fa"/>
+                <circle cx="420" cy="130" r="18" fill="#34d399"/>
+                <path d="M200 130 L350 130" stroke="#0ea5a4" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Ciri-ciri Platform Economy + mini kuis -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Ciri-ciri Platform">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Ciri-ciri Platform Economy</h2>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="rounded-xl p-4 bg-sky-50 border border-sky-200">
+              <div class="flex items-center gap-2"><span>🌐</span><span class="heading font-semibold text-sky-900">Network Effect</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Semakin banyak pengguna, semakin tinggi nilai.</p>
+            </div>
+            <div class="rounded-xl p-4 bg-emerald-50 border border-emerald-200">
+              <div class="flex items-center gap-2"><span>📈</span><span class="heading font-semibold text-sky-900">Skalabilitas</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Biaya marjinal rendah untuk menambah pengguna.</p>
+            </div>
+            <div class="rounded-xl p-4 bg-cyan-50 border border-cyan-200">
+              <div class="flex items-center gap-2"><span>📊</span><span class="heading font-semibold text-sky-900">Data</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Data mendorong personalisasi dan keputusan.</p>
+            </div>
+          </div>
+          <div class="mt-5 rounded-2xl p-4 border border-emerald-300 bg-gradient-to-r from-emerald-50 to-sky-50">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">👉</span>
+              <span class="font-semibold text-sky-900">Mini Kuis: Sebutkan contoh platform lain selain Gojek/Grab.</span>
+            </div>
+            <div class="mt-3 flex flex-col md:flex-row gap-2">
+              <input id="quiz-platform" class="flex-1 px-4 py-3 rounded-xl border border-emerald-200" placeholder="Tulis nama platform...">
+              <button class="rounded-xl px-4 py-3 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" onclick="checkPlatform()">Cek Jawaban</button>
+            </div>
+            <p id="quiz-platform-result" class="mt-2 text-sm"></p>
+          </div>
+        </section>
+
+        <!-- 6. Contoh Nyata Platform -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Contoh Nyata">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Contoh Nyata Platform</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Card logos (SVG placeholders) -->
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-400 to-sky-400 grid place-items-center text-white font-bold">G</div>
+                <div class="heading font-semibold text-sky-900">Gojek/Grab</div>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Menghubungkan driver–penumpang & layanan on-demand.</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-400 to-sky-400 grid place-items-center text-white font-bold">T</div>
+                <div class="heading font-semibold text-sky-900">Tokopedia/Shopee</div>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Marketplace seller–buyer untuk berbagai kategori.</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-400 to-sky-400 grid place-items-center text-white font-bold">Y</div>
+                <div class="heading font-semibold text-sky-900">YouTube</div>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Platform video yang menghubungkan creator–viewer–ads.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Diskusi Mini -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Diskusi Mini">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Diskusi Mini</h2>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="rounded-2xl p-4 bg-yellow-50 border border-yellow-200 sticky-note">
+              <div class="text-sm text-sky-900/80">Bagaimana platform menciptakan nilai?</div>
+              <textarea class="w-full mt-2 p-3 rounded-lg border border-yellow-200" rows="4" placeholder="Tulis ide kalian..."></textarea>
+            </div>
+            <div class="rounded-2xl p-4 bg-yellow-50 border border-yellow-200 sticky-note">
+              <div class="text-sm text-sky-900/80">Apa keuntungan & tantangan?</div>
+              <textarea class="w-full mt-2 p-3 rounded-lg border border-yellow-200" rows="4" placeholder="Kelebihan dan risiko..."></textarea>
+            </div>
+            <div class="rounded-2xl p-4 bg-yellow-50 border border-yellow-200 sticky-note">
+              <div class="text-sm text-sky-900/80">Ruang kosong ide mahasiswa</div>
+              <div id="note-canvas" class="relative h-44 rounded-lg bg-white/50 border border-yellow-200 overflow-hidden"></div>
+              <div class="mt-2 flex gap-2">
+                <input id="new-note" class="flex-1 px-3 py-2 rounded-lg border border-yellow-200" placeholder="Tambah sticky note...">
+                <button class="px-3 py-2 rounded-lg bg-emerald-500 text-white font-semibold" onclick="addSticky()">Tambah</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Freemium -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Freemium">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900">Model Bisnis Digital Populer – Freemium</h2>
+          <p class="text-sky-900/80 mt-2">Versi gratis menarik pengguna, versi premium membuka fitur lanjut.</p>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="rounded-2xl p-5 bg-sky-50 border border-sky-200">
+              <div class="flex items-center gap-2">
+                <span>🔓</span><span class="heading font-semibold text-sky-900">Free</span>
+              </div>
+              <ul class="text-sky-900/70 text-sm mt-2 list-disc pl-5">
+                <li>Akses fitur dasar</li>
+                <li>Iklan/limit penggunaan</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl p-5 bg-emerald-50 border border-emerald-200">
+              <div class="flex items-center gap-2">
+                <span>🔒</span><span class="heading font-semibold text-sky-900">Premium</span>
+              </div>
+              <ul class="text-sky-900/70 text-sm mt-2 list-disc pl-5">
+                <li>Fitur lengkap tanpa batas</li>
+                <li>Dukungan prioritas</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 text-sky-900/80 text-sm">
+            Contoh: Spotify, Dropbox, Canva
+          </div>
+        </section>
+
+        <!-- 9. Subscription -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Subscription">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900">Model Subscription</h2>
+          <p class="text-sky-900/80 mt-2">Pengguna membayar rutin untuk akses berkelanjutan.</p>
+          <div class="grid md:grid-cols-2 gap-4 mt-4 items-center">
+            <div class="rounded-2xl p-5 bg-cyan-50 border border-cyan-200">
+              <div class="flex items-center gap-2">
+                <span>🗓️</span><span class="heading font-semibold text-sky-900">Kalender & Pembayaran</span>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Bulanan/tahunan dengan opsi paket.</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <div class="flex items-center gap-2">
+                <span>💳</span><span class="heading font-semibold text-sky-900">Contoh</span>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Netflix, Microsoft 365, Zoom Pro</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. Marketplace + Tabel -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Marketplace">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900">Model Marketplace</h2>
+          <p class="text-sky-900/80 mt-2">Menghubungkan penjual–pembeli, platform mengambil komisi.</p>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="rounded-2xl p-5 bg-sky-50 border border-sky-200">
+              <div class="flex items-center gap-2">
+                <span>🛒</span><span class="heading font-semibold text-sky-900">Contoh</span>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Tokopedia, Traveloka, Upwork</p>
+            </div>
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <div class="heading font-semibold text-sky-900 mb-2">Perbandingan</div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm text-sky-900/80">
+                  <thead class="bg-emerald-50 text-sky-900 border border-emerald-200">
+                    <tr>
+                      <th class="text-left p-2">Model</th>
+                      <th class="text-left p-2">Cara Monetisasi</th>
+                      <th class="text-left p-2">Contoh</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-emerald-100 border border-emerald-100">
+                    <tr>
+                      <td class="p-2">Freemium</td>
+                      <td class="p-2">Upgrade ke premium</td>
+                      <td class="p-2">Spotify, Canva</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2">Subscription</td>
+                      <td class="p-2">Bayar berkala</td>
+                      <td class="p-2">Netflix, M365</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2">Marketplace</td>
+                      <td class="p-2">Komisi/fees</td>
+                      <td class="p-2">Tokopedia, Upwork</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. BMC Intro -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="BMC – Intro">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Business Model Canvas (BMC) Digital – Intro</h2>
+          <div class="grid grid-cols-4 gap-2 text-xs md:text-sm">
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">1. Mitra Kunci 🤝</div><p class="text-sky-900/70 mt-1">Vendor, komunitas</p>
+            </div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">2. Aktivitas Kunci ⚙️</div><p class="text-sky-900/70 mt-1">Pengembangan produk</p>
+            </div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">3. Sumber Daya Kunci 🧩</div><p class="text-sky-900/70 mt-1">Tim & teknologi</p>
+            </div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">4. Proposisi Nilai 🎯</div><p class="text-sky-900/70 mt-1">Solusi utama</p>
+            </div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">5. Hubungan Pelanggan 💬</div><p class="text-sky-900/70 mt-1">Self-service, komunitas</p>
+            </div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">6. Kanal 📡</div><p class="text-sky-900/70 mt-1">Aplikasi, media sosial</p>
+            </div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">7. Segmen Pelanggan 👥</div><p class="text-sky-900/70 mt-1">Siapa yang dilayani</p>
+            </div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">8. Struktur Biaya 💸</div><p class="text-sky-900/70 mt-1">Server, SDM</p>
+            </div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200">
+              <div class="font-semibold">9. Arus Pendapatan 💵</div><p class="text-sky-900/70 mt-1">Langganan, komisi</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12. Contoh Aplikasi BMC -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Contoh BMC">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-4">Contoh BMC – Ruangguru</h2>
+          <p class="text-sky-900/80 mb-3">Klik tombol untuk menyorot blok satu per satu.</p>
+          <div class="grid grid-cols-4 gap-2 text-xs md:text-sm" id="bmc-demo">
+            <!-- 9 blocks, each with data-key -->
+            <div data-key="1" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Mitra Kunci</div><p class="text-sky-900/70 mt-1">Guru, sekolah, penerbit</p></div>
+            <div data-key="2" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Aktivitas Kunci</div><p class="text-sky-900/70 mt-1">Konten & platform</p></div>
+            <div data-key="3" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Sumber Daya Kunci</div><p class="text-sky-900/70 mt-1">Tim tech & tutor</p></div>
+            <div data-key="4" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Proposisi Nilai</div><p class="text-sky-900/70 mt-1">Belajar efektif & fleksibel</p></div>
+            <div data-key="5" class="bmc-block col-span-2 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Hubungan Pelanggan</div><p class="text-sky-900/70 mt-1">Komunitas & support</p></div>
+            <div data-key="6" class="bmc-block col-span-2 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Kanal</div><p class="text-sky-900/70 mt-1">Aplikasi, situs, media sosial</p></div>
+            <div data-key="7" class="bmc-block col-span-2 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Segmen Pelanggan</div><p class="text-sky-900/70 mt-1">Siswa & orang tua</p></div>
+            <div data-key="8" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Struktur Biaya</div><p class="text-sky-900/70 mt-1">Konten, server, pemasaran</p></div>
+            <div data-key="9" class="bmc-block col-span-1 rounded-lg p-3 bg-white border border-emerald-200"><div class="font-semibold">Arus Pendapatan</div><p class="text-sky-900/70 mt-1">Subscription, B2B sekolah</p></div>
+          </div>
+          <div class="mt-3 flex gap-2">
+            <button class="rounded-xl px-4 py-2 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" onclick="nextBMC()">Sorot Berikutnya</button>
+            <button class="rounded-xl px-4 py-2 bg-white text-sky-800 font-semibold border border-emerald-200" onclick="resetBMC()">Reset</button>
+          </div>
+        </section>
+
+        <!-- 13. Studi Kasus Gojek -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Studi Kasus Gojek">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-2">Studi Kasus: Gojek</h2>
+          <p class="text-sky-900/80">Latar belakang: super-app yang menghubungkan transportasi, pembayaran, dan layanan on-demand.</p>
+          <div class="grid md:grid-cols-3 gap-3 mt-4">
+            <div class="rounded-xl p-4 bg-white border border-emerald-200">
+              <div class="font-semibold">Segmen</div>
+              <p class="text-sky-900/70 text-sm mt-1">Penumpang, UMKM, driver</p>
+            </div>
+            <div class="rounded-xl p-4 bg-white border border-emerald-200">
+              <div class="font-semibold">Value</div>
+              <p class="text-sky-900/70 text-sm mt-1">Cepat, terjangkau, aman</p>
+            </div>
+            <div class="rounded-xl p-4 bg-white border border-emerald-200">
+              <div class="font-semibold">Channels</div>
+              <p class="text-sky-900/70 text-sm mt-1">Aplikasi mobile</p>
+            </div>
+            <div class="rounded-xl p-4 bg-white border border-emerald-200">
+              <div class="font-semibold">Pendapatan</div>
+              <p class="text-sky-900/70 text-sm mt-1">Komisi, biaya layanan, iklan</p>
+            </div>
+            <div class="rounded-xl p-4 bg-white border border-emerald-200">
+              <div class="font-semibold">Sumber Daya</div>
+              <p class="text-sky-900/70 text-sm mt-1">Driver, teknologi, brand</p>
+            </div>
+            <div class="rounded-xl p-4 bg-gradient-to-br from-sky-50 to-emerald-50 border border-emerald-200">
+              <div class="flex items-center gap-2">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-400 to-sky-400 grid place-items-center text-white font-bold">G</div>
+                <div class="heading font-semibold text-sky-900">Gojek</div>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Ikon di pusat ekosistem</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14. Workshop BMC – Instruksi -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Workshop BMC">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-2">Workshop BMC – Instruksi</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <ul class="list-disc pl-5 text-sky-900/80">
+                <li>Bentuk kelompok 4–5 orang</li>
+                <li>Pilih salah satu startup: Traveloka, Ruangguru, Amartha, Sociolla, KlikDokter</li>
+                <li>Analisis BMC secara ringkas dan jelas</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl p-5 bg-gradient-to-br from-sky-50 to-emerald-50 border border-emerald-200">
+              <!-- teamwork illustration -->
+              <div class="flex items-center gap-3">
+                <div class="icon-bubble h-10 w-10 rounded-lg grid place-items-center">🤝</div>
+                <div class="heading font-semibold text-sky-900">Teamwork</div>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-2">Kolaborasi, bagi peran, dan presentasikan hasil.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 15. Pertanyaan Panduan Workshop -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Pertanyaan Panduan">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-3">Pertanyaan Panduan Workshop</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- Interactive boxes toggle highlight -->
+            <button class="group rounded-2xl p-4 text-left bg-white border border-emerald-200 hover:bg-emerald-50" onclick="toggleCheck(this)">
+              <div class="flex items-center gap-2"><span>1️⃣</span><span class="font-semibold text-sky-900">Model bisnis utama?</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Platform, subscription, freemium, hybrid?</p>
+            </button>
+            <button class="group rounded-2xl p-4 text-left bg-white border border-emerald-200 hover:bg-emerald-50" onclick="toggleCheck(this)">
+              <div class="flex items-center gap-2"><span>2️⃣</span><span class="font-semibold text-sky-900">Nilai untuk pengguna?</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Masalah apa yang terpecahkan?</p>
+            </button>
+            <button class="group rounded-2xl p-4 text-left bg-white border border-emerald-200 hover:bg-emerald-50" onclick="toggleCheck(this)">
+              <div class="flex items-center gap-2"><span>3️⃣</span><span class="font-semibold text-sky-900">Cara menghasilkan pendapatan?</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Komisi, langganan, iklan?</p>
+            </button>
+            <button class="group rounded-2xl p-4 text-left bg-white border border-emerald-200 hover:bg-emerald-50" onclick="toggleCheck(this)">
+              <div class="flex items-center gap-2"><span>4️⃣</span><span class="font-semibold text-sky-900">Sumber daya kunci?</span></div>
+              <p class="text-sky-900/70 text-sm mt-1">Tim, data, kemitraan?</p>
+            </button>
+          </div>
+        </section>
+
+        <!-- 16. Template Kosong BMC -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Template Kosong BMC">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-3">Template Kosong BMC</h2>
+          <p class="text-sky-900/70 mb-3">Klik di setiap blok untuk menulis. Semua tersimpan di browser kalian.</p>
+          <div id="bmc-template" class="grid grid-cols-4 gap-2 text-xs md:text-sm">
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="partners">Mitra Kunci...</div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="activities">Aktivitas Kunci...</div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="resources">Sumber Daya Kunci...</div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="value">Proposisi Nilai...</div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="relationships">Hubungan Pelanggan...</div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="channels">Kanal...</div>
+            <div class="col-span-2 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="segments">Segmen Pelanggan...</div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="costs">Struktur Biaya...</div>
+            <div class="col-span-1 rounded-lg p-3 bg-white border border-emerald-200" contenteditable="true" data-bmc="revenue">Arus Pendapatan...</div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button class="rounded-xl px-4 py-2 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" onclick="saveBMC()">Simpan Template</button>
+            <button class="rounded-xl px-4 py-2 bg-white text-sky-800 font-semibold border border-emerald-200" onclick="loadBMC()">Muat Template</button>
+            <button class="rounded-xl px-4 py-2 bg-white text-sky-800 font-semibold border border-emerald-200" onclick="clearBMC()">Bersihkan</button>
+          </div>
+        </section>
+
+        <!-- 17. Penutup -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Penutup">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-3">Penutup</h2>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-3"><span>✅</span><span class="text-sky-900/80">Memahami dasar model bisnis digital dan platform</span></li>
+            <li class="flex items-start gap-3"><span>✅</span><span class="text-sky-900/80">Membedakan freemium, subscription, dan marketplace</span></li>
+            <li class="flex items-start gap-3"><span>✅</span><span class="text-sky-900/80">Menerapkan BMC untuk studi kasus</span></li>
+          </ul>
+        </section>
+
+        <!-- 18. Tugas Pertemuan Selanjutnya -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Tugas Selanjutnya">
+          <h2 class="heading text-2xl md:text-3xl font-bold text-sky-900 mb-3">Tugas Pertemuan Selanjutnya</h2>
+          <div class="grid md:grid-cols-2 gap-4 items-start">
+            <div class="rounded-2xl p-5 bg-white border border-emerald-200">
+              <ul class="list-disc pl-6 text-sky-900/80">
+                <li>Buat ide startup digital baru</li>
+                <li>Isi BMC lengkap</li>
+                <li>Siapkan presentasi singkat (5 menit)</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl p-5 bg-gradient-to-br from-sky-50 to-emerald-50 border border-emerald-200">
+              <div class="flex items-center gap-3">
+                <span>📚</span><span class="heading font-semibold text-sky-900">Referensi</span>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-1">Gunakan artikel, laporan industri, dan studi kasus relevan.</p>
+              <div class="mt-3 flex items-center gap-3">
+                <span>💻</span><span class="heading font-semibold text-sky-900">Perangkat</span>
+              </div>
+              <p class="text-sky-900/70 text-sm mt-1">Gunakan Template BMC di atas saat latihan.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 19. Slide Bonus -->
+        <section class="slide glass rounded-3xl p-6 md:p-10" data-title="Slide Bonus">
+          <div class="rounded-3xl p-8 bg-gradient-to-br from-sky-600 to-emerald-600 text-white text-center">
+            <div class="heading text-2xl md:text-3xl font-extrabold mb-3">“Digital business bukan hanya tentang teknologi, tapi bagaimana menciptakan nilai baru.”</div>
+            <div class="mx-auto w-28 h-28 rounded-2xl grid place-items-center bg-white/15 border border-white/30">
+              <!-- futuristik icon -->
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v6m0 6v6M3 12h6m6 0h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer Navigation -->
+  <footer class="w-full py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div class="text-white/70 text-sm">
+        Navigasi: gunakan tombol di bawah atau tombol ← → di keyboard
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="rounded-xl px-4 py-2 bg-white/10 text-white border border-white/20 hover:bg-white/20" data-nav="prev">◀ Sebelumnya</button>
+        <div id="slideIndicator" class="text-white/80 text-sm min-w-[110px] text-center">1 / 19</div>
+        <button class="rounded-xl px-4 py-2 bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold btn" data-nav="next">Berikutnya ▶</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Slide system
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
+
+    function updateProgress() {
+      const progress = ((current+1) / slides.length) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+      document.getElementById('slideIndicator').textContent = (current+1) + ' / ' + slides.length;
+      // TOC active state
+      const toc = document.getElementById('toc');
+      Array.from(toc.querySelectorAll('button')).forEach((b,i)=>{
+        b.classList.toggle('bg-emerald-100', i===current);
+        b.classList.toggle('border-emerald-300', i===current);
+      });
+    }
+
+    function showSlide(index, animate=true) {
+      if(index<0 || index>=slides.length) return;
+      const prev = slides[current];
+      const next = slides[index];
+      if(animate){
+        prev.classList.remove('fade-enter','fade-enter-active');
+        prev.classList.add('fade-exit');
+        setTimeout(()=>prev.classList.add('fade-exit-active'),10);
+      }
+      prev.style.display='none';
+      next.style.display='block';
+      if(animate){
+        next.classList.add('fade-enter');
+        setTimeout(()=>next.classList.add('fade-enter-active'),10);
+        setTimeout(()=>{
+          next.classList.remove('fade-enter','fade-enter-active');
+          prev.classList.remove('fade-exit','fade-exit-active');
+        },500);
+      }
+      current = index;
+      updateProgress();
+      // persist lecturer name into header subtitle tooltip
+    }
+
+    // Initialize
+    slides.forEach((s,i)=>{ s.style.display = i===0 ? 'block' : 'none'; });
+    updateProgress();
+
+    // TOC
+    const tocEl = document.getElementById('toc');
+    slides.forEach((s, i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'w-full text-left px-3 py-2 rounded-lg border border-transparent hover:bg-emerald-50';
+      btn.textContent = (i+1) + '. ' + s.dataset.title;
+      btn.addEventListener('click', ()=>showSlide(i));
+      tocEl.appendChild(btn);
+    });
+    updateProgress();
+
+    // Navigation buttons
+    document.querySelectorAll('[data-nav="next"]').forEach(b=>b.addEventListener('click', ()=>showSlide(current+1)));
+    document.querySelectorAll('[data-nav="prev"]').forEach(b=>b.addEventListener('click', ()=>showSlide(current-1)));
+
+    // Jump button
+    document.querySelectorAll('[data-jump]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const title = b.getAttribute('data-jump');
+        const idx = slides.findIndex(s=>s.dataset.title===title);
+        if(idx>-1) showSlide(idx);
+      });
+    });
+
+    // Keyboard nav
+    window.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowRight') showSlide(current+1);
+      if(e.key==='ArrowLeft') showSlide(current-1);
+    });
+
+    // Theme toggle (contrast)
+    let contrast=false;
+    document.getElementById('toggleTheme').addEventListener('click', ()=>{
+      contrast = !contrast;
+      document.body.style.background = contrast
+        ? 'linear-gradient(135deg, #0b1220, #0b3b4a)'
+        : '';
+      document.body.classList.toggle('bg-gradient-to-br', !contrast);
+      document.body.classList.toggle('from-sky-900', !contrast);
+      document.body.classList.toggle('via-cyan-900', !contrast);
+      document.body.classList.toggle('to-emerald-900', !contrast);
+    });
+
+    // Free text saver (simple feedback)
+    function saveFreeText(id){
+      const el = document.getElementById(id);
+      const val = (el.value||'').trim();
+      const s = document.getElementById(id+'-status');
+      if(!val){ s && (s.textContent='Tolong isi dulu ya 🙂'); s && s.classList.remove('hidden'); return; }
+      try{
+        const list = JSON.parse(localStorage.getItem('answers')||'[]');
+        list.push({q:id, a:val, t:Date.now()});
+        localStorage.setItem('answers', JSON.stringify(list));
+        if(s){ s.textContent='Terkirim! Terima kasih 🙌'; s.classList.remove('hidden'); }
+        el.value='';
+      }catch(e){}
+    }
+
+    // Mini quiz platform checker
+    function checkPlatform(){
+      const input = document.getElementById('quiz-platform');
+      const result = document.getElementById('quiz-platform-result');
+      const val = (input.value||'').toLowerCase().trim();
+      if(!val){ result.textContent='Tulis dulu contohnya ya 🙂'; result.className='mt-2 text-sm text-sky-900/80'; return; }
+      const banned = ['gojek','grab'];
+      const ok = banned.every(b=>!val.includes(b));
+      const examples = ['tokopedia','shopee','youtube','tiktok','bukalapak','lazada','airbnb','uber','ruangguru','traveloka','upwork','x','facebook','instagram'];
+      const good = ok && examples.some(ex=>val.includes(ex));
+      if(good){
+        result.textContent='Benar! Contoh bagus 👏';
+        result.className='mt-2 text-sm text-emerald-700';
+      }else if(!ok){
+        result.textContent='Coba sebutkan selain Gojek/Grab ya 😉';
+        result.className='mt-2 text-sm text-amber-600';
+      }else{
+        result.textContent='Bisa jadi benar. Diskusikan bersama kelas! 💬';
+        result.className='mt-2 text-sm text-sky-900/80';
+      }
+      // save attempt
+      try{
+        const list = JSON.parse(localStorage.getItem('quiz')||'[]');
+        list.push({q:'platform-examples', a:val, t:Date.now()});
+        localStorage.setItem('quiz', JSON.stringify(list));
+      }catch(e){}
+      input.value='';
+    }
+
+    // Sticky notes board
+    const board = document.getElementById('note-canvas');
+    function addSticky(){
+      const txt = document.getElementById('new-note');
+      const val = (txt.value||'').trim();
+      if(!val) return;
+      const note = document.createElement('div');
+      note.className='absolute draggable sticky-note rounded-lg p-2 bg-yellow-100 border border-yellow-300 text-sky-900/90 text-xs';
+      note.textContent = val;
+      // random position
+      const W = board.clientWidth, H = board.clientHeight;
+      const x = Math.floor(Math.random()*(W-120));
+      const y = Math.floor(Math.random()*(H-60));
+      note.style.left = x+'px';
+      note.style.top = y+'px';
+      board.appendChild(note);
+      enableDrag(note);
+      txt.value='';
+    }
+    function enableDrag(el){
+      let offsetX=0, offsetY=0, dragging=false;
+      el.addEventListener('mousedown', (e)=>{
+        dragging=true;
+        offsetX = e.clientX - el.getBoundingClientRect().left;
+        offsetY = e.clientY - el.getBoundingClientRect().top;
+      });
+      window.addEventListener('mousemove', (e)=>{
+        if(!dragging) return;
+        const rect = board.getBoundingClientRect();
+        let x = e.clientX - rect.left - offsetX;
+        let y = e.clientY - rect.top - offsetY;
+        x = Math.max(0, Math.min(x, board.clientWidth - el.offsetWidth));
+        y = Math.max(0, Math.min(y, board.clientHeight - el.offsetHeight));
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+      });
+      window.addEventListener('mouseup', ()=> dragging=false);
+      // touch
+      el.addEventListener('touchstart', (e)=>{
+        const t = e.touches[0];
+        dragging=true;
+        offsetX = t.clientX - el.getBoundingClientRect().left;
+        offsetY = t.clientY - el.getBoundingClientRect().top;
+      }, {passive:true});
+      window.addEventListener('touchmove', (e)=>{
+        if(!dragging) return;
+        const t = e.touches[0];
+        const rect = board.getBoundingClientRect();
+        let x = t.clientX - rect.left - offsetX;
+        let y = t.clientY - rect.top - offsetY;
+        x = Math.max(0, Math.min(x, board.clientWidth - el.offsetWidth));
+        y = Math.max(0, Math.min(y, board.clientHeight - el.offsetHeight));
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+      }, {passive:true});
+      window.addEventListener('touchend', ()=> dragging=false);
+    }
+
+    // Interactive guide boxes toggle
+    function toggleCheck(btn){
+      const active = btn.getAttribute('data-checked')==='1';
+      if(active){
+        btn.setAttribute('data-checked','0');
+        btn.classList.remove('ring','ring-emerald-300','bg-emerald-50');
+      }else{
+        btn.setAttribute('data-checked','1');
+        btn.classList.add('ring','ring-emerald-300','bg-emerald-50');
+      }
+    }
+
+    // BMC Demo highlight logic
+    let bmcIndex = 0;
+    function nextBMC(){
+      const blocks = document.querySelectorAll('#bmc-demo .bmc-block');
+      blocks.forEach(b=>b.classList.remove('ring','ring-emerald-400','bg-emerald-50'));
+      const el = blocks[bmcIndex % blocks.length];
+      el.classList.add('ring','ring-emerald-400','bg-emerald-50');
+      bmcIndex++;
+    }
+    function resetBMC(){
+      const blocks = document.querySelectorAll('#bmc-demo .bmc-block');
+      bmcIndex = 0;
+      blocks.forEach(b=>b.classList.remove('ring','ring-emerald-400','bg-emerald-50'));
+    }
+
+    // BMC Template storage
+    const bmcEl = document.getElementById('bmc-template');
+    function saveBMC(){
+      const data = {};
+      bmcEl.querySelectorAll('[data-bmc]').forEach(el=>{
+        data[el.dataset.bmc] = el.innerHTML;
+      });
+      localStorage.setItem('bmc-template', JSON.stringify(data));
+      toast('Template tersimpan ✅');
+    }
+    function loadBMC(){
+      const raw = localStorage.getItem('bmc-template');
+      if(!raw) { toast('Belum ada yang tersimpan'); return; }
+      try{
+        const data = JSON.parse(raw);
+        bmcEl.querySelectorAll('[data-bmc]').forEach(el=>{
+          el.innerHTML = data[el.dataset.bmc] || '';
+        });
+        toast('Template dimuat 🎉');
+      }catch(e){ toast('Gagal memuat'); }
+    }
+    function clearBMC(){
+      bmcEl.querySelectorAll('[data-bmc]').forEach(el=>el.innerHTML='');
+      toast('Template dikosongkan');
+    }
+
+    // Simple toast
+    function toast(msg){
+      let t = document.getElementById('toast');
+      if(!t){
+        t = document.createElement('div');
+        t.id='toast';
+        t.className='fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-sky-500 shadow-lg';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.opacity='0';
+      t.style.transition='opacity .2s';
+      requestAnimationFrame(()=>{t.style.opacity='1';});
+      setTimeout(()=>{ t.style.opacity='0'; }, 1800);
+    }
+
+    // Persist lecturer name to localStorage
+    const lecturer = document.getElementById('lecturerName');
+    lecturer.value = localStorage.getItem('lecturer-name') || lecturer.value;
+    lecturer.addEventListener('change', ()=>{
+      localStorage.setItem('lecturer-name', lecturer.value);
+      toast('Nama pengajar disimpan');
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972216880058cbe1',t:'MTc1NTY5NDk3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
