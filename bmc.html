@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Materi Interaktif: Business Model Canvas (e-Bisnis)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Subtle slide transitions */
+    .slide { display: none; opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+    .slide.active { display: block; opacity: 1; transform: translateY(0); }
+    .tag { display:inline-block; border-radius:9999px; padding:.2rem .6rem; font-size:.75rem; }
+    .glass { background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); }
+    .grid-bmc { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+    @media (min-width: 1024px) {
+      /* Layout mendekati BMC aslinya pada layar lebar */
+      .grid-bmc { 
+        grid-template-columns: 2fr 3fr 2fr 3fr; 
+        grid-template-rows: auto auto auto; 
+      }
+      .bmc-cs { grid-column: 1 / span 1; grid-row: 1 / span 2; }
+      .bmc-vp { grid-column: 2 / span 1; grid-row: 1 / span 2; }
+      .bmc-ch { grid-column: 3 / span 1; grid-row: 1 / span 1; }
+      .bmc-cr { grid-column: 3 / span 1; grid-row: 2 / span 1; }
+      .bmc-rs { grid-column: 1 / span 1; grid-row: 3 / span 1; }
+      .bmc-ka { grid-column: 4 / span 1; grid-row: 1 / span 1; }
+      .bmc-kr { grid-column: 4 / span 1; grid-row: 2 / span 1; }
+      .bmc-kp { grid-column: 2 / span 1; grid-row: 3 / span 1; }
+      .bmc-co { grid-column: 4 / span 1; grid-row: 3 / span 1; }
+    }
+    .pulse { animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-fuchsia-600 via-indigo-600 to-cyan-500 text-white antialiased">
+  <div class="max-w-6xl mx-auto px-4 py-6 lg:py-10">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6 lg:mb-8">
+      <div class="flex items-center gap-3">
+        <div class="p-3 rounded-2xl bg-white/10">
+          <!-- Simple BMC icon -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="text-white/90">
+            <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 4v16M15 4v16M3 10h18M3 14h18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl lg:text-2xl font-bold">Materi Interaktif: Business Model Canvas</h1>
+          <p class="text-white/80 text-sm">Mata Kuliah e-Bisnis · Prodi Sistem Informasi · 3 SKS</p>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-2">
+        <span class="tag bg-white/10">Ringan</span>
+        <span class="tag bg-white/10">Interaktif</span>
+        <span class="tag bg-white/10">Visual</span>
+      </div>
+    </header>
+
+    <!-- Progress -->
+    <div class="w-full h-3 bg-white/10 rounded-full overflow-hidden mb-6">
+      <div id="progressBar" class="h-full bg-white/80 rounded-full transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Slides Wrapper -->
+    <div id="slides" class="space-y-4">
+
+      <!-- Slide 1: Intro -->
+      <section class="slide active glass rounded-2xl p-6 lg:p-8">
+        <div class="flex flex-col lg:flex-row gap-8 items-center">
+          <div class="flex-1">
+            <h2 class="text-2xl lg:text-3xl font-extrabold leading-tight">Apa itu BMC dan kenapa penting untuk e‑Bisnis?</h2>
+            <p class="text-white/90 mt-3">Business Model Canvas (BMC) adalah kanvas 1 halaman untuk memetakan cara sebuah bisnis menciptakan, menyampaikan, dan menangkap nilai. Untuk e‑Bisnis, BMC membantu kamu merancang ide digital secara cepat, jelas, dan mudah diujikan.</p>
+            <ul class="mt-4 space-y-2 text-white/90">
+              <li>• Ringkas: semua inti model bisnis di satu halaman</li>
+              <li>• Praktis: memudahkan diskusi tim dan validasi cepat</li>
+              <li>• Adaptif: mudah diubah saat ada data/masukan baru</li>
+            </ul>
+          </div>
+          <div class="flex-1">
+            <div class="rounded-2xl bg-white/10 p-6">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg col-span-2"></div>
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg"></div>
+                <div class="bg-white/10 h-20 rounded-lg col-span-3"></div>
+              </div>
+              <p class="text-center text-white/70 text-sm mt-3">Bayangkan 9 blok yang saling terhubung</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: 9 Blocks -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold mb-4">9 Blok Utama Business Model Canvas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Each card with small icon -->
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3" stroke="white" /><circle cx="16" cy="16" r="3" stroke="white"/><path d="M11 11l2 2" stroke="white"/></svg>
+              <h3 class="font-semibold">Customer Segments</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Kelompok orang yang dilayani.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="white"/><path d="M8 12h8" stroke="white"/></svg>
+              <h3 class="font-semibold">Value Propositions</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Manfaat unik yang ditawarkan.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="white"/><path d="M14 5l7 7-7 7" stroke="white"/></svg>
+              <h3 class="font-semibold">Channels</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Cara menyampaikan nilai.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 7h12v10H6z" stroke="white"/><path d="M8 9h8v6H8z" fill="white" opacity=".15"/></svg>
+              <h3 class="font-semibold">Customer Relationships</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Cara membina hubungan.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 14h10M7 10h10" stroke="white"/><circle cx="6" cy="10" r="1" fill="white"/><circle cx="6" cy="14" r="1" fill="white"/></svg>
+              <h3 class="font-semibold">Revenue Streams</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Cara menghasilkan uang.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 18h14M7 6h10l2 6H5l2-6z" stroke="white"/></svg>
+              <h3 class="font-semibold">Key Activities</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Aktivitas inti bisnis.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" stroke="white"/><path d="M9 9h6v6H9z" fill="white" opacity=".15"/></svg>
+              <h3 class="font-semibold">Key Resources</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Sumber daya utama.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7z" stroke="white"/><path d="M4 12h16" stroke="white"/></svg>
+              <h3 class="font-semibold">Key Partners</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Mitra penting pendukung.</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 18h16M6 12h12M8 6h8" stroke="white"/></svg>
+              <h3 class="font-semibold">Cost Structure</h3>
+            </div>
+            <p class="text-white/85 mt-2 text-sm">Biaya utama yang timbul.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Pilih Studi Kasus -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold mb-4">Pilih Studi Kasus</h2>
+        <p class="text-white/90 mb-4">Pilih satu kasus agar contoh dan umpan balik menyesuaikan:</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <label class="cursor-pointer bg-white/10 rounded-xl p-5 hover:bg-white/15 transition">
+            <div class="flex items-start gap-3">
+              <input type="radio" name="case" value="boba" class="mt-1 accent-white" />
+              <div>
+                <h3 class="font-semibold">Usaha Minuman Boba</h3>
+                <p class="text-white/85 text-sm">Kedai kecil dekat kampus, menu kekinian.</p>
+              </div>
+            </div>
+          </label>
+          <label class="cursor-pointer bg-white/10 rounded-xl p-5 hover:bg-white/15 transition">
+            <div class="flex items-start gap-3">
+              <input type="radio" name="case" value="laundry" class="mt-1 accent-white" />
+              <div>
+                <h3 class="font-semibold">Jasa Laundry Kiloan</h3>
+                <p class="text-white/85 text-sm">Antar-jemput area kos mahasiswa.</p>
+              </div>
+            </div>
+          </label>
+          <label class="cursor-pointer bg-white/10 rounded-xl p-5 hover:bg-white/15 transition">
+            <div class="flex items-start gap-3">
+              <input type="radio" name="case" value="instagram" class="mt-1 accent-white" />
+              <div>
+                <h3 class="font-semibold">Toko Online di Instagram</h3>
+                <p class="text-white/85 text-sm">Jual aksesoris/merch kampus.</p>
+              </div>
+            </div>
+          </label>
+        </div>
+        <p id="caseNote" class="mt-4 text-white/90"></p>
+      </section>
+
+      <!-- Slide 4-8: Q&A Interaktif -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Interaktif 1: Customer Segments</h2>
+        <p class="text-white/90 mt-2">Menurutmu, siapa segmen pelanggan utama untuk kasus yang kamu pilih?</p>
+        <div class="mt-4">
+          <textarea id="qa-cs" class="w-full rounded-xl p-4 bg-white/10 text-white placeholder-white/60 outline-none" rows="3" placeholder="Tulis jawabanmu di sini..."></textarea>
+          <div class="flex gap-3 mt-3">
+            <button data-check="cs" class="checkBtn px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Cek Jawaban</button>
+            <button data-hint="cs" class="hintBtn px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/25">Butuh Contoh?</button>
+          </div>
+          <div id="fb-cs" class="mt-3"></div>
+        </div>
+      </section>
+
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Interaktif 2: Value Propositions</h2>
+        <p class="text-white/90 mt-2">Apa proposisi nilai yang membuat pelanggan tertarik?</p>
+        <div class="mt-4">
+          <textarea id="qa-vp" class="w-full rounded-xl p-4 bg-white/10 text-white placeholder-white/60 outline-none" rows="3" placeholder="Tulis jawabanmu di sini..."></textarea>
+          <div class="flex gap-3 mt-3">
+            <button data-check="vp" class="checkBtn px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Cek Jawaban</button>
+            <button data-hint="vp" class="hintBtn px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/25">Butuh Contoh?</button>
+          </div>
+          <div id="fb-vp" class="mt-3"></div>
+        </div>
+      </section>
+
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Interaktif 3: Channels</h2>
+        <p class="text-white/90 mt-2">Melalui saluran apa produk/jasa disampaikan?</p>
+        <div class="mt-4">
+          <textarea id="qa-ch" class="w-full rounded-xl p-4 bg-white/10 text-white placeholder-white/60 outline-none" rows="3" placeholder="Tulis jawabanmu di sini..."></textarea>
+          <div class="flex gap-3 mt-3">
+            <button data-check="ch" class="checkBtn px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Cek Jawaban</button>
+            <button data-hint="ch" class="hintBtn px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/25">Butuh Contoh?</button>
+          </div>
+          <div id="fb-ch" class="mt-3"></div>
+        </div>
+      </section>
+
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Interaktif 4: Customer Relationships</h2>
+        <p class="text-white/90 mt-2">Bagaimana menjaga hubungan agar pelanggan kembali?</p>
+        <div class="mt-4">
+          <textarea id="qa-cr" class="w-full rounded-xl p-4 bg-white/10 text-white placeholder-white/60 outline-none" rows="3" placeholder="Tulis jawabanmu di sini..."></textarea>
+          <div class="flex gap-3 mt-3">
+            <button data-check="cr" class="checkBtn px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Cek Jawaban</button>
+            <button data-hint="cr" class="hintBtn px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/25">Butuh Contoh?</button>
+          </div>
+          <div id="fb-cr" class="mt-3"></div>
+        </div>
+      </section>
+
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Interaktif 5: Revenue Streams</h2>
+        <p class="text-white/90 mt-2">Sumber pendapatan apa yang mungkin?</p>
+        <div class="mt-4">
+          <textarea id="qa-rs" class="w-full rounded-xl p-4 bg-white/10 text-white placeholder-white/60 outline-none" rows="3" placeholder="Tulis jawabanmu di sini..."></textarea>
+          <div class="flex gap-3 mt-3">
+            <button data-check="rs" class="checkBtn px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Cek Jawaban</button>
+            <button data-hint="rs" class="hintBtn px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/25">Butuh Contoh?</button>
+          </div>
+          <div id="fb-rs" class="mt-3"></div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Template Tabel Kosong -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-bold">Template BMC (Isi Sendiri)</h2>
+          <div class="flex gap-2">
+            <button id="btnReset" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/25">Reset</button>
+            <button id="btnAutoFill" class="px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Isi Contoh Otomatis</button>
+          </div>
+        </div>
+        <p class="text-white/90 mt-2">Gunakan kotak di bawah untuk mengisi 9 blok BMC-mu.</p>
+
+        <div id="bmcEditable" class="grid-bmc mt-5">
+          <!-- Each block -->
+          <div class="bmc-cs bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Customer Segments</h3>
+            <textarea data-bmc="cs" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Mahasiswa penghuni kos..."></textarea>
+          </div>
+          <div class="bmc-vp bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Value Propositions</h3>
+            <textarea data-bmc="vp" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Harga hemat, selesai cepat..."></textarea>
+          </div>
+          <div class="bmc-ch bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Channels</h3>
+            <textarea data-bmc="ch" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: IG, WhatsApp, poster kos..."></textarea>
+          </div>
+          <div class="bmc-cr bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Customer Relationships</h3>
+            <textarea data-bmc="cr" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Member poin, garansi..."></textarea>
+          </div>
+          <div class="bmc-rs bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Revenue Streams</h3>
+            <textarea data-bmc="rs" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Per kilo, paket..."></textarea>
+          </div>
+          <div class="bmc-ka bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Key Activities</h3>
+            <textarea data-bmc="ka" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Produksi, pengantaran..."></textarea>
+          </div>
+          <div class="bmc-kr bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Key Resources</h3>
+            <textarea data-bmc="kr" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Peralatan, tim..."></textarea>
+          </div>
+          <div class="bmc-kp bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Key Partners</h3>
+            <textarea data-bmc="kp" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Supplier, komunitas..."></textarea>
+          </div>
+          <div class="bmc-co bg-white/10 rounded-xl p-4">
+            <h3 class="font-semibold">Cost Structure</h3>
+            <textarea data-bmc="co" class="mt-2 w-full h-28 rounded-lg p-3 bg-white/10 text-white outline-none" placeholder="Contoh: Bahan baku, listrik..."></textarea>
+          </div>
+        </div>
+        <p class="text-white/80 text-sm mt-3">Tips: isi singkat berupa poin-poin. Kamu bisa menyalin hasil interaktif sebelumnya.</p>
+      </section>
+
+      <!-- Slide 10: Contoh BMC Terisi -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-bold">Contoh BMC (Berdasarkan Studi Kasus)</h2>
+          <button id="btnSwitchCase" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/25">Ganti Kasus</button>
+        </div>
+        <p class="text-white/90 mt-2">Contoh ini otomatis menyesuaikan dengan pilihanmu.</p>
+        <div id="bmcExample" class="grid-bmc mt-5">
+          <!-- Filled example blocks will render here -->
+        </div>
+      </section>
+
+      <!-- Slide 11: Refleksi -->
+      <section class="slide glass rounded-2xl p-6 lg:p-8">
+        <h2 class="text-2xl font-bold">Refleksi: Manfaat BMC untuk Ide e‑Bisnis</h2>
+        <ul class="text-white/90 mt-3 space-y-2">
+          <li>• Menyederhanakan ide: semua inti bisnis tersusun rapi dalam satu halaman.</li>
+          <li>• Mempercepat validasi: mudah menguji segmen, nilai, dan saluran digital.</li>
+          <li>• Memudahkan pivot: cepat menyesuaikan saat data pelanggan berubah.</li>
+          <li>• Menyatukan tim: semua orang punya gambaran yang sama.</li>
+        </ul>
+        <div class="mt-5 p-5 bg-white/10 rounded-xl">
+          <p class="font-semibold">Tantangan kecil:</p>
+          <p class="text-white/90 mt-1">Ambil satu ide bisnis digitalmu. Lengkapi 9 blok di template, lalu uji 1 blok di lapangan (misalnya tanya 5 teman: apakah mereka tertarik dengan proposisi nilaimu?).</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Navigation -->
+    <footer class="mt-6 flex items-center justify-between">
+      <button id="prevBtn" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/25 disabled:opacity-40">Sebelumnya</button>
+      <div class="text-white/85 text-sm"><span id="slideIndex">1</span>/<span id="slideTotal">11</span></div>
+      <button id="nextBtn" class="px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:opacity-90">Berikutnya</button>
+    </footer>
+  </div>
+
+  <script>
+    // State
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressBar = document.getElementById('progressBar');
+    const slideIndex = document.getElementById('slideIndex');
+    const slideTotal = document.getElementById('slideTotal');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const caseNote = document.getElementById('caseNote');
+    const caseRadios = Array.from(document.querySelectorAll('input[name="case"]'));
+    const btnReset = document.getElementById('btnReset');
+    const btnAutoFill = document.getElementById('btnAutoFill');
+    const btnSwitchCase = document.getElementById('btnSwitchCase');
+    const bmcExample = document.getElementById('bmcExample');
+
+    let current = 0;
+    slideTotal.textContent = String(slides.length);
+
+    let selectedCase = null;
+
+    // Sample data per case
+    const dataByCase = {
+      boba: {
+        label: "Usaha Minuman Boba",
+        cs: ["Mahasiswa kampus sekitar", "pengunjung kafe kecil", "komunitas pecinta minuman manis"],
+        vp: ["Rasa kekinian", "topping variatif", "size hemat", "opsi less sugar", "promo bundling"],
+        ch: ["Booth dekat kampus", "Instagram", "GoFood/GrabFood", "WhatsApp untuk pre-order"],
+        cr: ["Kartu stamp 9+1", "voucher ulang tahun", "IG story update menu", "respons cepat DM"],
+        rs: ["Penjualan per cup", "bundle paket teman", "biaya tambahan topping premium"],
+        ka: ["Riset menu", "produksi minuman", "promosi online", "layanan di booth"],
+        kr: ["Mesin sealer", "peralatan seduh", "bahan baku teh/susu", "staf barista"],
+        kp: ["Supplier boba & susu", "komunitas kampus", "platform pesan-antar"],
+        co: ["Bahan baku", "sewa booth", "kemasan cup", "promosi", "listrik/air"]
+      },
+      laundry: {
+        label: "Jasa Laundry Kiloan",
+        cs: ["Mahasiswa penghuni kos/asrama", "mahasiswa magang/organisasi", "dosen/staf (opsional)"],
+        vp: ["Antar-jemput gratis", "selesai 24 jam", "opsi express 6 jam", "paket hemat mahasiswa", "wangi/hipoalergenik"],
+        ch: ["WhatsApp/Line OA", "Instagram", "poster kos", "Google Maps"],
+        cr: ["Member poin", "update status pesanan", "garansi ulang cuci", "reminder jemput"],
+        rs: ["Cuci per kilo", "paket bulanan", "express fee", "setrika tambahan"],
+        ka: ["Jemput-sortir-cuci-kering-setrika-kemas-antar", "penjadwalan", "kontrol kualitas"],
+        kr: ["Mesin cuci/pengering", "setrika", "motor", "staf operasional"],
+        kp: ["Supplier deterjen", "pemilik kos", "bengkel/servis"],
+        co: ["Deterjen/pewangi", "listrik/air", "bensin", "perawatan", "sewa (jika ada)", "kemasan", "promosi"]
+      },
+      instagram: {
+        label: "Toko Online Instagram",
+        cs: ["Mahasiswa pemburu promo", "penggemar merch kampus", "hadiah teman/kado"],
+        vp: ["Desain eksklusif", "custom nama", "stok terbatas (FOMO)", "harga terjangkau"],
+        ch: ["Instagram Feed/Reels", "DM + Link WhatsApp", "Shopee/marketplace (opsional)"],
+        cr: ["Balas DM cepat", "giveaway rutin", "testimoni highlight", "program referral"],
+        rs: ["Penjualan per item", "pre-order", "custom fee", "ongkir (ditanggung pembeli)"],
+        ka: ["Desain produk", "foto konten", "manajemen pesanan", "pengemasan & pengiriman"],
+        kr: ["Bahan kaos/aksesoris", "printer/DTF (opsional)", "akun IG aktif", "waktu admin"],
+        kp: ["Supplier bahan", "jasa sablon/DTF", "ekspedisi", "influencer mikro kampus"],
+        co: ["Bahan & produksi", "kemasan", "iklan IG", "biaya ekspedisi (ditagih ke pembeli)"]
+      }
+    };
+
+    // Hints & keyword checks per block
+    const keywords = {
+      cs: { boba: ["mahasiswa", "kampus", "kafe", "minuman"], laundry: ["mahasiswa", "kos", "asrama", "staf"], instagram: ["mahasiswa", "instagram", "merch", "promo"] },
+      vp: { boba: ["rasa", "topping", "less", "promo", "hemat"], laundry: ["antar", "jemput", "24", "express", "hemat", "wangi"], instagram: ["custom", "eksklusif", "stok", "terbatas", "terjangkau"] },
+      ch: { boba: ["booth", "instagram", "gofood", "grab", "whatsapp"], laundry: ["whatsapp", "instagram", "poster", "maps"], instagram: ["instagram", "dm", "whatsapp", "reels", "shopee"] },
+      cr: { boba: ["stamp", "voucher", "ig", "dm"], laundry: ["member", "update", "garansi", "reminder"], instagram: ["dm", "giveaway", "testimoni", "referral"] },
+      rs: { boba: ["cup", "bundle", "topping"], laundry: ["kilo", "paket", "express", "setrika"], instagram: ["item", "pre", "custom", "ongkir"] }
+    };
+
+    function updateProgress() {
+      const pct = ((current + 1) / slides.length) * 100;
+      progressBar.style.width = pct + '%';
+      slideIndex.textContent = String(current + 1);
+      prevBtn.disabled = current === 0;
+      nextBtn.textContent = current === slides.length - 1 ? 'Selesai' : 'Berikutnya';
+    }
+
+    function showSlide(index) {
+      slides.forEach((s, i) => s.classList.toggle('active', i === index));
+      current = index;
+      updateProgress();
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (current > 0) showSlide(current - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (current < slides.length - 1) showSlide(current + 1);
+      else {
+        // Back to first slide at end
+        showSlide(0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    // Case selection
+    caseRadios.forEach(r => {
+      r.addEventListener('change', (e) => {
+        selectedCase = e.target.value;
+        caseNote.textContent = `Dipilih: ${dataByCase[selectedCase].label}. Semua contoh & umpan balik akan mengikuti kasus ini.`;
+        renderExample();
+      });
+    });
+
+    // Interactive checks
+    function getInputEl(key) { return document.getElementById('qa-' + key); }
+    function getFbEl(key) { return document.getElementById('fb-' + key); }
+
+    function colorBox(ok) {
+      return ok ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-100' : 'bg-amber-500/20 border border-amber-400 text-amber-100';
+    }
+
+    function checkAnswer(blockKey) {
+      const el = getInputEl(blockKey);
+      const fb = getFbEl(blockKey);
+      const text = (el.value || '').toLowerCase();
+      if (!selectedCase) {
+        fb.innerHTML = `<div class="mt-2 p-3 rounded-lg bg-white/10">Pilih studi kasus dulu ya di slide sebelumnya.</div>`;
+        return;
+      }
+      const keys = keywords[blockKey][selectedCase];
+      const hits = keys.filter(k => text.includes(k));
+      const ok = hits.length >= Math.max(1, Math.ceil(keys.length * 0.3));
+      fb.innerHTML = `
+        <div class="mt-2 p-3 rounded-lg ${colorBox(ok)}">
+          ${ok ? 'Mantap! Jawabanmu sudah mengarah dengan baik.' : 'Ayo lengkapi lagi beberapa poin penting.'}
+          <div class="mt-2 text-white/90">
+            Contoh jawaban yang baik:
+            <ul class="list-disc pl-5 mt-1">
+              ${dataByCase[selectedCase][blockKey].slice(0,4).map(i => `<li>${i}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+      fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showHint(blockKey) {
+      const fb = getFbEl(blockKey);
+      if (!selectedCase) {
+        fb.innerHTML = `<div class="mt-2 p-3 rounded-lg bg-white/10">Pilih studi kasus dulu ya di slide sebelumnya.</div>`;
+        return;
+      }
+      const tips = dataByCase[selectedCase][blockKey].slice(0,4).join(' • ');
+      fb.innerHTML = `<div class="mt-2 p-3 rounded-lg bg-white/10">Ide: ${tips}</div>`;
+    }
+
+    document.querySelectorAll('.checkBtn').forEach(btn => {
+      btn.addEventListener('click', () => checkAnswer(btn.dataset.check));
+    });
+    document.querySelectorAll('.hintBtn').forEach(btn => {
+      btn.addEventListener('click', () => showHint(btn.dataset.hint));
+    });
+
+    // Editable template actions
+    const editableFields = Array.from(document.querySelectorAll('[data-bmc]'));
+    function resetEditable() {
+      editableFields.forEach(t => t.value = '');
+      pulseOnce(bmcEditableEl());
+    }
+    function bmcEditableEl(){ return document.getElementById('bmcEditable'); }
+
+    function autofillEditable() {
+      if (!selectedCase) {
+        alert('Pilih studi kasus dulu ya.');
+        return;
+      }
+      const d = dataByCase[selectedCase];
+      editableFields.forEach(t => {
+        const key = t.getAttribute('data-bmc');
+        t.value = (d[key] || []).join('\n• ');
+        if (t.value) t.value = '• ' + t.value;
+      });
+      pulseOnce(bmcEditableEl());
+    }
+
+    function pulseOnce(el) {
+      el.classList.add('pulse');
+      setTimeout(() => el.classList.remove('pulse'), 700);
+    }
+
+    btnReset.addEventListener('click', resetEditable);
+    btnAutoFill.addEventListener('click', autofillEditable);
+
+    // Example (read-only) renderer
+    function renderExample() {
+      const d = selectedCase ? dataByCase[selectedCase] : null;
+      const placeholder = `<div class="col-span-4 text-center text-white/80 p-6">Pilih studi kasus untuk melihat contoh BMC.</div>`;
+      if (!d) { bmcExample.innerHTML = placeholder; return; }
+
+      const blockCard = (title, items, extraClass) => `
+        <div class="${extraClass} bg-white/10 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">${title}</h3>
+          <ul class="space-y-1 text-white/90 text-sm">
+            ${items.map(i => `<li>• ${i}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+
+      bmcExample.innerHTML = [
+        blockCard('Customer Segments', d.cs, 'bmc-cs'),
+        blockCard('Value Propositions', d.vp, 'bmc-vp'),
+        blockCard('Channels', d.ch, 'bmc-ch'),
+        blockCard('Customer Relationships', d.cr, 'bmc-cr'),
+        blockCard('Revenue Streams', d.rs, 'bmc-rs'),
+        blockCard('Key Activities', d.ka, 'bmc-ka'),
+        blockCard('Key Resources', d.kr, 'bmc-kr'),
+        blockCard('Key Partners', d.kp, 'bmc-kp'),
+        blockCard('Cost Structure', d.co, 'bmc-co')
+      ].join('');
+      pulseOnce(bmcExample);
+    }
+    renderExample();
+
+    // Switch case quick action
+    btnSwitchCase.addEventListener('click', () => {
+      const order = ['boba', 'laundry', 'instagram'];
+      if (!selectedCase) selectedCase = order[0];
+      else {
+        const idx = order.indexOf(selectedCase);
+        selectedCase = order[(idx + 1) % order.length];
+      }
+      // set radio UI
+      caseRadios.forEach(r => r.checked = r.value === selectedCase);
+      caseNote.textContent = `Dipilih: ${dataByCase[selectedCase].label}. Contoh & umpan balik diperbarui.`;
+      renderExample();
+      showSlide(2); // jump to pilihan kasus slide
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft') prevBtn.click();
+    });
+
+    // Initial progress
+    updateProgress();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9727265ad29940ca',t:'MTc1NTc0ODA1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
